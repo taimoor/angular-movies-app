@@ -1,24 +1,257 @@
-<video src="http://www.html5tutorial.info/media/html5iscool.mp4" controls width="480" height="360"></video>
-Upload on form submit or button click
-<form ng-app="fileUpload" ng-controller="MyCtrl" name="form">
-    Single Image with validations
-    <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*"
-         accept="image/*" ngf-max-size="20MB" ngf-min-height="100">Select</div>
-    Multiple files
-    <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
-    Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
-    <button type="submit" ng-click="submit()">submit</button>
-</form>
+<!--<video src="http://www.html5tutorial.info/media/html5iscool.mp4" controls width="480" height="360"></video>-->
+<div class="ng-v">
+    Angular Version: <input type="text" ng-model="angularVersion" class="ng-pristine ng-valid">
+    <input type="button" data-ng-click="changeAngularVersion()" value="Go">
+</div>
+<h2>Angular file upload Demo</h2>
 
-Upload right away after file selection:
-<div class="button" ngf-select="upload($file)">Upload on file select</div>
-<div class="button" ngf-select="uploadFiles($files)" multiple="multiple">Upload on file select</div>
-Drop File:
-<div ngf-drop="uploadFiles($files)" class="drop-box"
-     ngf-drag-over-class="dragover" ngf-multiple="true"
-     ngf-pattern="'image/*,application/pdf'">Drop Images or PDFs files here</div>
-<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+<h3>
+    Visit <a href="https://github.com/danialfarid/ng-file-upload">ng-file-upload</a> on github
+</h3>
 
-Image thumbnail: <img ngf-src="file || '/thumb.jpg'">
-Audio preview: <audio controls ngf-src="file"></audio>
-Video preview: <video controls ngf-src="file"></video>
+<div class="upload-div">
+    <div class="edit-div">
+        <a ng-click="showEdit = !showEdit" href="javascript:void(0)">+ edit upload html</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a ng-show="showEdit" ng-click="confirm() &amp;&amp; (editHtml = defaultHtml)" href="javascript:void(0)" class="ng-hide">reset to
+            default</a><br><br>
+
+        <div ng-show="showEdit" id="htmlEdit" class="ng-hide"><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 34px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;" tabindex="0"></textarea></div><div class="CodeMirror-hscrollbar" style="left: 29px; display: block; right: 15px;"><div style="height: 100%; min-height: 1px; width: 3530px;"></div></div><div class="CodeMirror-vscrollbar" style="display: block; bottom: 15px;"><div style="min-width: 1px; height: 834px;"></div></div><div class="CodeMirror-scrollbar-filler" style="display: block; width: 15px; height: 15px;"></div><div class="CodeMirror-gutter-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 29px; min-width: 3529.72px; min-height: 834px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><div style="width: 50px; height: 50px; overflow-x: scroll;"></div><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>59</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 14px;">&nbsp;</div></div><div class="CodeMirror-code"><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">1</div></div><pre class=""><span style="padding-right: 0.1px;"><span>&#8203;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre class=""><span style="padding-right: 0.1px;">      <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">div</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre class=""><span style="padding-right: 0.1px;">        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">div</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre class=""><span style="padding-right: 0.1px;">          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">form</span> <span class="cm-attribute">name</span>=<span class="cm-string">"myForm"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre class=""><span style="padding-right: 0.1px;">            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">fieldset</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">6</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">legend</span><span class="cm-tag cm-bracket">&gt;</span>Upload on form submit<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">legend</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">7</div></div><pre class=""><span style="padding-right: 0.1px;">              Username: <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">input</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text"</span> <span class="cm-attribute">name</span>=<span class="cm-string">"userName"</span> <span class="cm-attribute">ng-model</span>=<span class="cm-string">"username"</span> <span class="cm-attribute">size</span>=<span class="cm-string">"39"</span> <span class="cm-attribute">required</span>=<span class="cm-string">""</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">8</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">i</span> <span class="cm-attribute">ng-show</span>=<span class="cm-string">"myForm.userName.$error.required"</span><span class="cm-tag cm-bracket">&gt;</span>*required<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">i</span><span class="cm-tag cm-bracket">&gt;&lt;</span><span class="cm-tag">br</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">9</div></div><pre class=""><span style="padding-right: 0.1px;">              Profile Picture: <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">input</span> <span class="cm-attribute">type</span>=<span class="cm-string">"file"</span> <span class="cm-attribute">ngf-select</span>=<span class="cm-string">""</span> <span class="cm-attribute">ng-model</span>=<span class="cm-string">"picFile"</span> <span class="cm-attribute">name</span>=<span class="cm-string">"file"</span> <span class="cm-attribute">accept</span>=<span class="cm-string">"image/*"</span> <span class="cm-attribute">required</span>=<span class="cm-string">""</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">10</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">i</span> <span class="cm-attribute">ng-show</span>=<span class="cm-string">"myForm.file.$error.required"</span><span class="cm-tag cm-bracket">&gt;</span>*required<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">i</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">11</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">br</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">12</div></div><pre class=""><span style="padding-right: 0.1px;"><span>&#8203;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">13</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">button</span> <span class="cm-attribute">ng-disabled</span>=<span class="cm-string">"!myForm.$valid"</span> <span class="cm-attribute">ng-click</span>=<span class="cm-string">"uploadPic(picFile)"</span><span class="cm-tag cm-bracket">&gt;</span>Submit<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">button</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">14</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">img</span> <span class="cm-attribute">ngf-src</span>=<span class="cm-string">"picFile"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"thumb"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">15</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">span</span> <span class="cm-attribute">class</span>=<span class="cm-string">"progress"</span> <span class="cm-attribute">ng-show</span>=<span class="cm-string">"picFile.progress &gt;= 0"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">16</div></div><pre class=""><span style="padding-right: 0.1px;">                  <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">div</span> <span class="cm-attribute">style</span>=<span class="cm-string">"width:{{picFile.progress}}%"</span> <span class="cm-attribute">ng-bind</span>=<span class="cm-string">"picFile.progress + '%'"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"ng-binding"</span><span class="cm-tag cm-bracket">&gt;&lt;/</span><span class="cm-tag">div</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">17</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">span</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">18</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">span</span> <span class="cm-attribute">ng-show</span>=<span class="cm-string">"picFile.result"</span><span class="cm-tag cm-bracket">&gt;</span>Upload Successful<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">span</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">19</div></div><pre class=""><span style="padding-right: 0.1px;">            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">fieldset</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">20</div></div><pre class=""><span style="padding-right: 0.1px;">            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">br</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">21</div></div><pre class=""><span style="padding-right: 0.1px;">          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">form</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">22</div></div><pre class=""><span style="padding-right: 0.1px;">        <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">div</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">23</div></div><pre class=""><span style="padding-right: 0.1px;">        <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">fieldset</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">24</div></div><pre class=""><span style="padding-right: 0.1px;">          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">legend</span><span class="cm-tag cm-bracket">&gt;</span>Play with options<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">legend</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">25</div></div><pre class=""><span style="padding-right: 0.1px;">          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"up-buttons"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">26</div></div><pre class=""><span style="padding-right: 0.1px;">            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">div</span> <span class="cm-attribute">ngf-select</span>=<span class="cm-string">""</span> <span class="cm-attribute">ngf-drop</span>=<span class="cm-string">""</span> <span class="cm-attribute">ng-model</span>=<span class="cm-string">"files"</span> <span class="cm-attribute">ngf-multiple</span>=<span class="cm-string">"multiple"</span> <span class="cm-attribute">ngf-pattern</span>=<span class="cm-string">"pattern"</span> <span class="cm-attribute">accept</span>=<span class="cm-string">"{{acceptSelect}}"</span> <span class="cm-attribute">ng-disabled</span>=<span class="cm-string">"disabled"</span> <span class="cm-attribute">ngf-capture</span>=<span class="cm-string">"capture"</span> <span class="cm-attribute">ngf-drag-over-class</span>=<span class="cm-string">"{accept:'dragover', reject:'dragover-err', delay:100}"</span> <span class="cm-attribute">ngf-validate</span>=<span class="cm-string">"validateObj"</span> <span class="cm-attribute">ngf-keep</span>=<span class="cm-string">"keep"</span> <span class="cm-attribute">ngf-keep-distinct</span>=<span class="cm-string">"keepDistinct"</span> <span class="cm-attribute">ngf-allow-dir</span>=<span class="cm-string">"allowDir"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"drop-box"</span> <span class="cm-attribute">ngf-drop-available</span>=<span class="cm-string">"dropAvailable"</span><span class="cm-tag cm-bracket">&gt;</span>Select File,</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">27</div></div><pre class=""><span style="padding-right: 0.1px;">              <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">span</span> <span class="cm-attribute">ng-show</span>=<span class="cm-string">"dropAvailable"</span><span class="cm-tag cm-bracket">&gt;</span>Drop File or Paste Image<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">span</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">28</div></div><pre class=""><span style="padding-right: 0.1px;">            <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">div</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">29</div></div><pre class=""><span style="padding-right: 0.1px;">            <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">br</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">30</div></div><pre class=""><span style="padding-right: 0.1px;">          <span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">div</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px; width: 29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">31</div></div><pre class=""><span style="padding-right: 0.1px;">          <span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"custom"</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; top: 834px;"></div><div class="CodeMirror-gutters" style="height: 834px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></div>
+    </div>
+
+    <div class="upload-buttons">
+        <div id="editArea" class="ng-scope">
+            <div>
+                <div>
+                    <form name="myForm" class="ng-dirty ng-valid ng-valid-required">
+                        <fieldset>
+                            <legend>Upload on form submit</legend>
+                            Username: <input type="text" name="userName" ng-model="username" size="39" required="" class="ng-dirty ng-valid ng-valid-required">
+                            <i ng-show="myForm.userName.$error.required" class="ng-hide">*required</i><br>
+                            Profile Picture: <input type="file" ngf-select="" ng-model="picFile" name="file" accept="image/*" required="" class="ng-pristine ng-valid-pattern ng-valid-min-size ng-valid-max-size ng-valid-validate-fn ng-valid ng-valid-required">
+                            <i ng-show="myForm.file.$error.required" class="ng-hide">*required</i>
+                            <br>
+
+                            <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+                            <img ngf-src="picFile" class="thumb ngf-hide">
+              <span class="progress" ng-show="picFile.progress >= 0">
+                  <div style="width:100%" ng-bind="picFile.progress + '%'" class="ng-binding">100%</div>
+              </span>
+                            <span ng-show="picFile.result" class="">Upload Successful</span>
+                        </fieldset>
+                        <br>
+                    </form>
+                </div>
+                <fieldset>
+                    <legend>Play with options</legend>
+                    <div class="up-buttons">
+                        <div ngf-select="" ngf-drop="" ng-model="files" ngf-multiple="multiple" ngf-pattern="pattern" accept="" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-validate="validateObj" ngf-keep="keep" ngf-keep-distinct="keepDistinct" ngf-allow-dir="allowDir" class="drop-box ng-pristine ng-valid ng-valid-min-size ng-valid-max-size ng-valid-validate-fn ng-valid-max-duration" ngf-drop-available="dropAvailable">Select File,
+                            <span ng-show="dropAvailable" class="">Drop File or Paste Image</span>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="custom">
+                        <label>accept (for select browser dependent): <input type="text" ng-model="acceptSelect" class="ng-valid ng-dirty"></label><br>
+                        <label>ngf-capture (for mobile): <input type="text" ng-model="capture" class="ng-pristine ng-valid"></label><br>
+                        <label>ngf-pattern (validate file model): <input type="text" ng-model="pattern" class="ng-pristine ng-valid"></label><br>
+                        <label>ngf-validate: <input type="text" ng-model="validate" size="49" class="ng-pristine ng-valid"></label><br>
+                        <label><input type="checkbox" ng-model="multiple" class="ng-pristine ng-valid">ngf-multiple (allow multiple files)</label><br>
+                        <label><input type="checkbox" ng-model="disabled" class="ng-pristine ng-valid">ng-disabled</label><br>
+                        <label><input type="checkbox" ng-model="allowDir" class="ng-pristine ng-valid">ngf-allow-dir (allow directory drop Chrome
+                            only)</label><br>
+                        <label><input type="checkbox" ng-model="keep" class="ng-pristine ng-valid">ngf-keep (keep the previous model values in
+                            ng-model)</label><br>
+                        <label><input type="checkbox" ng-model="keepDistinct" class="ng-pristine ng-valid">ngf-keep-distinct (do not allow
+                            duplicates)</label><br>
+                        <label><input type="checkbox" ng-model="resetOnClick" class="ng-pristine ng-valid">ngf-reset-on-click (reset file input and model on
+                            click)</label><br>
+                        <label><input type="checkbox" ng-model="resetModelOnClick" class="ng-pristine ng-valid">ngf-reset-model-on-click (reset model on
+                            click)</label><br>
+                    </div>
+
+                    <div class="preview">
+                        <div>Preview image/audio/video:</div>
+                        <img ngf-src="!files[0].$error &amp;&amp; files[0]" class="ngf-hide">
+                        <audio controls="" ngf-src="!files[0].$error &amp;&amp; files[0]" class="ngf-hide"></audio>
+                        <video controls="" ngf-src="!files[0].$error &amp;&amp; files[0]" class="" src="blob:https%3A//angular-file-upload.appspot.com/fb76c9a8-df13-4bee-b767-825ec9963211"></video>
+                    </div>
+                </fieldset>
+                <br>
+            </div>
+        </div>
+    </div>
+    <ul style="clear:both" ng-show="files.length > 0" class="response">
+        <!-- ngRepeat: f in files --><li class="sel-file ng-scope" ng-repeat="f in files">
+        <div ng-show="f.$error" class="ng-binding ng-hide">Invalid File:  , codeschool_1323.mp4 - size: 12464245B - type:
+            video/mp4
+        </div>
+        <div ng-hide="f.$error" class="ng-binding">
+            <img ngf-src="!f.$error &amp;&amp; f" class="thumb ngf-hide">
+				<span class="progress" ng-show="f.progress >= 0">
+					<div style="width:23%" class="ng-binding">23%</div>
+				</span>
+            <button class="button ng-hide" ng-click="f.upload.abort();f.upload.aborted=true" ng-show="f.upload != null &amp;&amp; f.progress < 100 &amp;&amp; !f.upload.aborted">Abort
+            </button>
+            codeschool_1323.mp4 - size: 12464245B - type: video/mp4
+            <a ng-show="f.result" href="javascript:void(0)" ng-click="f.showDetail = !f.showDetail" class="">details</a>
+
+            <div ng-show="f.showDetail" class="ng-hide">
+                <br>
+
+                <div data-ng-show="f.result.result == null" class="ng-binding ng-hide">{"result":[{"fieldName":"myFile","name":"codeschool_1323.mp4","size":"12464245"}],"requestHeaders":{"Host":"angular-file-upload-cors-srv.appspot.com","Accept":"application/json, text/plain, */*","Accept-Language":"en-US,en;q=0.8","Content-Length":"12464439","Content-Type":"multipart/form-data; boundary=----WebKitFormBoundaryKJM4NBNOmLTf7BhK","my-header":"my-header-value","origin":"https://angular-file-upload.appspot.com","Referer":"https://angular-file-upload.appspot.com/","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36","X-AppEngine-Country":"PK","X-AppEngine-Region":"?","X-AppEngine-City":"lahore","X-AppEngine-CityLatLong":"31.545050,74.340683"}}</div>
+                <ul>
+                    <!-- ngRepeat: item in f.result.result --><li ng-repeat="item in f.result.result" class="ng-scope">
+                    <div data-ng-show="item.name" class="ng-binding">file name: codeschool_1323.mp4</div>
+                    <div data-ng-show="item.fieldName" class="ng-binding">name: myFile</div>
+                    <div data-ng-show="item.size" class="ng-binding">size on the serve: 12464245</div>
+                    <div data-ng-show="item.value" class="ng-binding ng-hide">value: </div>
+                </li><!-- end ngRepeat: item in f.result.result -->
+                </ul>
+                <div data-ng-show="f.result.requestHeaders" class="reqh ng-binding">request headers: {"Host":"angular-file-upload-cors-srv.appspot.com","Accept":"application/json, text/plain, */*","Accept-Language":"en-US,en;q=0.8","Content-Length":"12464439","Content-Type":"multipart/form-data; boundary=----WebKitFormBoundaryKJM4NBNOmLTf7BhK","my-header":"my-header-value","origin":"https://angular-file-upload.appspot.com","Referer":"https://angular-file-upload.appspot.com/","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36","X-AppEngine-Country":"PK","X-AppEngine-Region":"?","X-AppEngine-City":"lahore","X-AppEngine-CityLatLong":"31.545050,74.340683"}</div>
+            </div>
+        </div>
+    </li><!-- end ngRepeat: f in files --><li class="sel-file ng-scope" ng-repeat="f in files">
+        <div ng-show="f.$error" class="ng-binding ng-hide">Invalid File:  , codeschool_1328.mp4 - size: 17604003B - type:
+            video/mp4
+        </div>
+        <div ng-hide="f.$error" class="ng-binding">
+            <img ngf-src="!f.$error &amp;&amp; f" class="thumb ngf-hide">
+				<span class="progress" ng-show="f.progress >= 0">
+					<div style="width:16%" class="ng-binding">16%</div>
+				</span>
+            <button class="button ng-hide" ng-click="f.upload.abort();f.upload.aborted=true" ng-show="f.upload != null &amp;&amp; f.progress < 100 &amp;&amp; !f.upload.aborted">Abort
+            </button>
+            codeschool_1328.mp4 - size: 17604003B - type: video/mp4
+            <a ng-show="f.result" href="javascript:void(0)" ng-click="f.showDetail = !f.showDetail" class="">details</a>
+
+            <div ng-show="f.showDetail" class="ng-hide">
+                <br>
+
+                <div data-ng-show="f.result.result == null" class="ng-binding ng-hide">{"result":[{"fieldName":"myFile","name":"codeschool_1328.mp4","size":"17604003"}],"requestHeaders":{"Host":"angular-file-upload-cors-srv.appspot.com","Accept":"application/json, text/plain, */*","Accept-Language":"en-US,en;q=0.8","Content-Length":"17604197","Content-Type":"multipart/form-data; boundary=----WebKitFormBoundaryajxbhBfErF3F5skM","my-header":"my-header-value","origin":"https://angular-file-upload.appspot.com","Referer":"https://angular-file-upload.appspot.com/","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36","X-AppEngine-Country":"PK","X-AppEngine-Region":"?","X-AppEngine-City":"lahore","X-AppEngine-CityLatLong":"31.545050,74.340683"}}</div>
+                <ul>
+                    <!-- ngRepeat: item in f.result.result --><li ng-repeat="item in f.result.result" class="ng-scope">
+                    <div data-ng-show="item.name" class="ng-binding">file name: codeschool_1328.mp4</div>
+                    <div data-ng-show="item.fieldName" class="ng-binding">name: myFile</div>
+                    <div data-ng-show="item.size" class="ng-binding">size on the serve: 17604003</div>
+                    <div data-ng-show="item.value" class="ng-binding ng-hide">value: </div>
+                </li><!-- end ngRepeat: item in f.result.result -->
+                </ul>
+                <div data-ng-show="f.result.requestHeaders" class="reqh ng-binding">request headers: {"Host":"angular-file-upload-cors-srv.appspot.com","Accept":"application/json, text/plain, */*","Accept-Language":"en-US,en;q=0.8","Content-Length":"17604197","Content-Type":"multipart/form-data; boundary=----WebKitFormBoundaryajxbhBfErF3F5skM","my-header":"my-header-value","origin":"https://angular-file-upload.appspot.com","Referer":"https://angular-file-upload.appspot.com/","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36","X-AppEngine-Country":"PK","X-AppEngine-Region":"?","X-AppEngine-City":"lahore","X-AppEngine-CityLatLong":"31.545050,74.340683"}</div>
+            </div>
+        </div>
+    </li><!-- end ngRepeat: f in files --><li class="sel-file ng-scope" ng-repeat="f in files">
+        <div ng-show="f.$error" class="ng-binding ng-hide">Invalid File:  , codeschool_1336.mp4 - size: 10641915B - type:
+            video/mp4
+        </div>
+        <div ng-hide="f.$error" class="ng-binding">
+            <img ngf-src="!f.$error &amp;&amp; f" class="thumb ngf-hide">
+				<span class="progress" ng-show="f.progress >= 0">
+					<div style="width:32%" class="ng-binding">32%</div>
+				</span>
+            <button class="button ng-hide" ng-click="f.upload.abort();f.upload.aborted=true" ng-show="f.upload != null &amp;&amp; f.progress < 100 &amp;&amp; !f.upload.aborted">Abort
+            </button>
+            codeschool_1336.mp4 - size: 10641915B - type: video/mp4
+            <a ng-show="f.result" href="javascript:void(0)" ng-click="f.showDetail = !f.showDetail" class="">details</a>
+
+            <div ng-show="f.showDetail" class="ng-hide">
+                <br>
+
+                <div data-ng-show="f.result.result == null" class="ng-binding ng-hide">{"result":[{"fieldName":"myFile","name":"codeschool_1336.mp4","size":"10641915"}],"requestHeaders":{"Host":"angular-file-upload-cors-srv.appspot.com","Accept":"application/json, text/plain, */*","Accept-Language":"en-US,en;q=0.8","Content-Length":"10642109","Content-Type":"multipart/form-data; boundary=----WebKitFormBoundaryeEZY6q8Gc8W2TalL","my-header":"my-header-value","origin":"https://angular-file-upload.appspot.com","Referer":"https://angular-file-upload.appspot.com/","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36","X-AppEngine-Country":"PK","X-AppEngine-Region":"?","X-AppEngine-City":"lahore","X-AppEngine-CityLatLong":"31.545050,74.340683"}}</div>
+                <ul>
+                    <!-- ngRepeat: item in f.result.result --><li ng-repeat="item in f.result.result" class="ng-scope">
+                    <div data-ng-show="item.name" class="ng-binding">file name: codeschool_1336.mp4</div>
+                    <div data-ng-show="item.fieldName" class="ng-binding">name: myFile</div>
+                    <div data-ng-show="item.size" class="ng-binding">size on the serve: 10641915</div>
+                    <div data-ng-show="item.value" class="ng-binding ng-hide">value: </div>
+                </li><!-- end ngRepeat: item in f.result.result -->
+                </ul>
+                <div data-ng-show="f.result.requestHeaders" class="reqh ng-binding">request headers: {"Host":"angular-file-upload-cors-srv.appspot.com","Accept":"application/json, text/plain, */*","Accept-Language":"en-US,en;q=0.8","Content-Length":"10642109","Content-Type":"multipart/form-data; boundary=----WebKitFormBoundaryeEZY6q8Gc8W2TalL","my-header":"my-header-value","origin":"https://angular-file-upload.appspot.com","Referer":"https://angular-file-upload.appspot.com/","User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.85 Safari/537.36","X-AppEngine-Country":"PK","X-AppEngine-Region":"?","X-AppEngine-City":"lahore","X-AppEngine-CityLatLong":"31.545050,74.340683"}</div>
+            </div>
+        </div>
+    </li><!-- end ngRepeat: f in files --><li class="sel-file ng-scope" ng-repeat="f in files">
+        <div ng-show="f.$error" class="ng-binding ng-hide">Invalid File:  , codeschool_1333.mp4 - size: 9489167B - type:
+            video/mp4
+        </div>
+        <div ng-hide="f.$error" class="ng-binding">
+            <img ngf-src="!f.$error &amp;&amp; f" class="thumb ngf-hide">
+				<span class="progress" ng-show="f.progress >= 0">
+					<div style="width:46%" class="ng-binding">46%</div>
+				</span>
+            <button class="button ng-hide" ng-click="f.upload.abort();f.upload.aborted=true" ng-show="f.upload != null &amp;&amp; f.progress < 100 &amp;&amp; !f.upload.aborted">Abort
+            </button>
+            codeschool_1333.mp4 - size: 9489167B - type: video/mp4
+            <a ng-show="f.result" href="javascript:void(0)" ng-click="f.showDetail = !f.showDetail" class="ng-hide">details</a>
+
+            <div ng-show="f.showDetail" class="ng-hide">
+                <br>
+
+                <div data-ng-show="f.result.result == null" class="ng-binding"></div>
+                <ul>
+                    <!-- ngRepeat: item in f.result.result -->
+                </ul>
+                <div data-ng-show="f.result.requestHeaders" class="reqh ng-binding ng-hide">request headers: </div>
+            </div>
+        </div>
+    </li><!-- end ngRepeat: f in files -->
+    </ul>
+
+    <br>
+
+    <div style="clear:both" class="err ng-binding ng-hide" ng-show="errorMsg != null"></div>
+</div>
+
+<div style="clear:both" class="server">
+    <div class="srv-title">How to upload to the server:</div>
+
+    <div class="howto">
+        <label><input type="radio" name="howToSend" ng-model="howToSend" value="1" ng-init="howToSend = 1" class="ng-pristine ng-valid">$upload.upload():
+            multipart/form-data upload cross browser</label>
+        <br>
+        <label><input type="radio" name="howToSend" ng-model="howToSend" value="2" ng-disabled="usingFlash" class="ng-pristine ng-valid">$upload.http(): binary content with file's
+            Content-Type</label>
+
+        <div class="sub">Can be used to upload files directory into <a href="https://github.com/danialfarid/angular-file-upload/issues/88">CouchDB</a>,
+            <a href="https://github.com/danialfarid/angular-file-upload/issues/87">imgur</a>, etc... without multipart form
+            data (HTML5 FileReader browsers only)<br>
+        </div>
+        <label><input type="radio" name="howToSend" ng-model="howToSend" value="3" class="ng-pristine ng-valid">Amazon S3 bucket upload</label>
+
+        <form ng-show="howToSend==3" class="s3 ng-pristine ng-valid ng-hide" id="s3form" action="http://localhost:8888" onsubmit="return false">
+            <br>
+            Provide S3 upload parameters. <a href="http://aws.amazon.com/articles/1434/" target="_blank">Click here for
+            detailed documentation</a><br><br>
+            <label>S3 upload url including bucket name:</label> <input type="text" ng-model="s3url" class="ng-pristine ng-valid"> <br>
+            <label>AWSAccessKeyId:</label> <input type="Text" name="AWSAccessKeyId" ng-model="AWSAccessKeyId" class="ng-pristine ng-valid"> <br>
+            <label>acl (private or public):</label> <input type="text" ng-model="acl" value="private" class="ng-pristine ng-valid"><br>
+            <label>success_action_redirect:</label> <input type="text" ng-model="success_action_redirect" class="ng-pristine ng-valid"><br>
+            <label>policy:</label> <input type="text" ng-model="policy" class="ng-pristine ng-valid"><br>
+            <label>signature:</label> <input type="text" ng-model="signature" class="ng-pristine ng-valid"><br>
+            <br>
+            <button ng-click="showHelper=!showHelper">S3 Policy signing helper (Optional)</button>
+            <br><br>
+
+            <div class="helper ng-hide" ng-show="showHelper">
+                If you don't have your policy and signature you can use this tool to generate them by providing these two fields
+                and clicking on sign<br>
+                <label>AWS Secret Key:</label> <input type="text" ng-model="AWSSecretKey" class="ng-pristine ng-valid"><br>
+                <label>JSON policy:</label><br> <textarea type="text" ng-model="jsonPolicy" rows="10" cols="70" class="ng-pristine ng-valid"></textarea>
+                <button ng-click="generateSignature()">Sign</button>
+            </div>
+        </form>
+        <br>
+        <br>
+
+        <div ng-show="howToSend != 3" class="">
+            <input type="checkbox" ng-model="generateErrorOnServer" class="ng-pristine ng-valid">Return server error with http code: <input type="text" ng-model="serverErrorCode" size="5" class="ng-pristine ng-valid"> and
+            message: <input type="text" ng-model="serverErrorMsg" class="ng-pristine ng-valid">
+            <br>
+        </div>
+        <br>
+    </div>
+</div>
+<a style="position:fixed;bottom:28px;right:10px;font-size:smaller;" target="_blank" href="https://angular-file-upload.appspot.com/donate.html">donate</a>
+<a style="position:fixed;bottom:45px;right:10px;font-size:smaller;" href="https://github.com/danialfarid/angular-file-upload/issues/new">Feedback/Issues</a>
+
+<div style="position:fixed;bottom:10px;right:10px;font-size:smaller;color:#777">Last update: 2015-07-29</div>
+
+
+<input type="file" ngf-select="" ngf-drop="" ng-model="files" ngf-multiple="multiple" ngf-pattern="pattern" accept="" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-validate="validateObj" ngf-keep="keep" ngf-keep-distinct="keepDistinct" ngf-allow-dir="allowDir" ngf-drop-available="dropAvailable" tabindex="-1" multiple="multiple" capture="camera" style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height: 0px; border: none; margin: 0px; padding: 0px;"><div id="techsmith-snagitchrome-extension"></div>
