@@ -1,0 +1,18 @@
+<p>This is the partial for view 1.</p>
+<!--{{movie_listing}}-->
+
+<table id="vedios-list-container">
+    <thead>
+    <tr>
+        <td>Title</td>
+        <td>Description</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr ng-repeat="movie in movie_listing.slice(0, 1)">
+        <td>{{movie.title}}</td>
+        <td>{{movie.body}}</td>
+    </tr>
+    </tbody>
+</table>

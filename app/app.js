@@ -1,12 +1,14 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('vedioCatalog', [
   'ngRoute',
-  'myApp.view1',
+  'listing',
+  'fileUpload',
   'myApp.view2',
-  'myApp.version'
+  'myApp.version',
+  'ngResource'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/listing'});
 }]);
